@@ -1,3 +1,5 @@
+MY CODE IS AT THE END OF THE WORKSHEET 
+
 # First programming assignment in C as a second language
 
 This is a tutorial-style assignment that assumes at least basic knowledge of another programming language such as Java or Python. In particular, it assumes familiarity with variables and data types, including arrays; common operators; conditionals and loops; functions, including `main`; and general program structure.
@@ -182,6 +184,112 @@ _Notes:
        
        Put this code into a `main` function of a file and play around with it to explore the duality of arrays and pointers. Soon, we'll see more important implications and key uses of this fact.
        
-3. Function arguments of array types.
+FULL CODE I DID FOR THE WORKSHEET:
+#include <stdio.h>
+//This is code for question 1-ii.
+int *value = 45;
 
-    1. blabla....
+void CantChange(int argument_i) {
+    argument_i = 15;
+}
+
+void CanChange(int *pointerToValue) {
+    *pointerToValue = 15; // dereference and assign a new value
+}
+
+
+
+//This is code for question 1-iii:
+int value2 = 25;              //sets global value2
+
+int ChangeAndReturn(int i) { //Adds one to parameter and returns the result
+    return i%6;             //returns the remainder of i / 6 rounded to the nearest whole number(because it is int)
+}
+
+
+
+
+int main() {
+    //question 1:
+    printf("\nQuestion 1. i.");
+    int *i = 90;  //declares a pointer(i) to integer and writes 90 in that memory location
+    i = 6;        // changes i to 6  *i=6 was invalid and did not allow any other code to run
+
+    printf("\nSingle Pointer to an int:");
+   printf("%d\n", i);
+
+    float *f = 2;    //declares a pointer(f) to float and writes 2.0 in the memory location
+    printf("\nPointer to a float:");
+    printf("%d\n", f);
+
+
+    char *c = "a";  //declares a pointer(c) to float and writes a in the memory location
+    printf("\nPointer to a character:\n");
+    printf(c);
+
+    int **p = 10;   // Not really sure what the double pointer does
+    printf("\nDouble Pointer to an int:\n");
+    printf("%d\n", p);
+
+    //Code for question 1-ii.
+    printf("\nQuestion 1. ii.");
+    printf("\nInitial value of global:");
+    printf("%d\n", value);
+    CantChange(value);
+    printf("\nValue after CantChange method is called:");
+    printf("%d\n", value);
+    CanChange(&value);  //must add & so that the value that the pointer is indicating gets changed instead of the pointer itself
+    printf("\nValue after CanChange method is called:");
+    printf("%d\n", value);
+
+
+    //Code for Question 1-iii.
+    printf("\nQuestion 1. iii.");
+    printf("\nInitial value:");
+    printf("%d\n", value2);
+    value2 = ChangeAndReturn(value2);
+    printf("\nChanged value:");
+    printf("%d\n", value2);
+
+    //Code for question 2-i.
+    printf("\nQuestion 2. i.");
+    int nums[10];
+    for(int i =0; i <= 10; i++){
+        nums[i] = i+1;
+    }
+
+    char letters[]= {"a, b, c, d, e, f,g,h"};
+
+    int sizeNums = sizeof(nums) / sizeof(nums[0]);
+    int sizeLetters = sizeof(letters)/ sizeof(letters[0]);
+
+    printf("\nSize in bytes of an array containing 10 ints:");
+    printf("%d\n", sizeNums);
+    printf("\nSize in bytes of an array containing 8 chars:");
+    printf("%d\n", sizeLetters);                                //interesting that even if there are fewer values, the chars cost more in bytes
+
+    //Question 2-ii.
+    printf("\nQuestion 2. ii.");
+    int iarray[10];
+
+    for (int i = 0; i < 10; i ++) {
+        iarray[i] = 0;
+    }
+
+    iarray[5] = 6;
+    int *jarr = iarray;
+    jarr[5] = jarr[5] + 1;
+    jarr[1] = 32;
+
+
+    for (int i = 0; i < 10; i ++) {
+        printf("%d\n", jarr[i] );
+    }
+
+    int sizeJarr = sizeof(jarr)/ sizeof(jarr[0]);
+    printf("The size of the jarr array in bytes:");
+    printf("%d\n", sizeJarr);
+
+
+    return 0;
+}
